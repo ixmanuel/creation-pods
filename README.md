@@ -28,7 +28,7 @@ Stop using "new" operator inside methods.
 
     $person = new PersonInitFromData(
         new PersonFetched(1),
-        OpenCreation::initMap([
+        OpenCreation::initMaps([
             Identity::class => ID::class,
             About::class    => AboutMe::class
         ])
