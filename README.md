@@ -5,23 +5,22 @@ Creating dependency objects only in convenience constructors.
 dependencies, dependency injection, inversion control, factory method
 
 ### Goal
-Stop using operator new inside methods.
+Stop using "new" operator inside methods.
 
 ### Benefits
-- Objects that instantiate other objects without new operator in their methods.
+- Objects that instantiate other objects without "new" operator in their methods.
 - Open dependency avoid a hard-coded one.
-- Autonomus injection avoid global dependency-injection-container.
+- Autonomus injection avoids global dependency-injection-container.
 - Simple code is maintainable code.
 
 ### Hacks because of limitation of the language
-- Convenience constructors are implemented with static methods but at the end, always call to the main constructor.
+- Convenience constructors are implemented with static methods because php doesn't provide overloading, but at the end, they always call to the main constructor. Thus, they are composable. (new Object) do the same as (Object::new)
 
 ### Advantages of the language
-- Referencing of classes and interfaces with its namespace
-
+- Referencing of classes and interfaces with its namespace.
 
 ### Alternatives
-- Usage of mapping or anonymous classes.
+- Usage of mapping or anonymous classes (tests cover this case).
 - Passing empty objects that create those who are fully identifiable.
 
 ### Here is an example that reconstitutes an entity from a data store.
@@ -29,7 +28,7 @@ Stop using operator new inside methods.
 
     $person = new PersonInitFromData(
         new PersonFetched(1),
-        OpenCreation::initFromSet([
+        OpenCreation::initMap([
             Identity::class => ID::class,
             About::class    => AboutMe::class
         ])
@@ -39,7 +38,7 @@ Stop using operator new inside methods.
     $this->assertTrue($person->about()->contact() == "lorem@ip.sum");
     
     
-    final class PersonInitFromData
+    final class PersonInitFromData implements Party
     {
         private $personData;
         private $mother;
