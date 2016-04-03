@@ -43,7 +43,7 @@ Stop using "new" operator inside methods.
         private $personData;
         private $mother;
 
-        public function __construct(PersonDataStore $personData, Model\Mother $mother)
+        public function __construct(PersonDataStore $personData, Model\OpenDependency $mother)
         {
             $this->personData = $personData;
 
