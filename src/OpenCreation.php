@@ -27,8 +27,8 @@ namespace Ixmanuel\OpenCreation;
  */
 class OpenCreation implements Model\OpenDependency
 {
-    /**
-    |
+
+    /*
     |--------------------------------------------------------------------------
     | Open creation for open dependencies = OO Creations
     |--------------------------------------------------------------------------

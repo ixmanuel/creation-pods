@@ -4,7 +4,7 @@
     "description": "Creating dependency objects only in convenience constructors.",
     "keywords": [
         "Ix",
-        "dependencies, dependency injection, inversion control, factory method"
+        "dependencies", "dependency injection", "inversion control", "factory method"
     ],
     "homepage": "https://github.com/ixmanuel/open-creation",
     "license": "MIT",
