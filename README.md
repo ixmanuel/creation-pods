@@ -24,4 +24,42 @@ Stop using operator new inside methods.
 - Usage of mapping or anonymous classes.
 - Passing empty objects that create those who are fully identifiable.
 
+### Here is an example that reconstitutes an entity from a data store.
+###### You just need to pass the interface and its implementation.
+
+    $person = new PersonInitFromData(
+        new PersonFetched(1),
+        OpenCreation::initFromSet([
+            Identity::class => ID::class,
+            About::class    => AboutMe::class
+        ])
+    );
+    
+    $this->assertTrue($person->identity()->name() == "Lorem Ipsum");
+    $this->assertTrue($person->about()->contact() == "lorem@ip.sum");
+    
+    
+    final class PersonInitFromData
+    {
+        private $personData;
+        private $mother;
+
+        public function __construct(PersonDataStore $personData, Model\Mother $mother)
+        {
+            $this->personData = $personData;
+
+            $this->mother = $mother;
+        }
+
+        public function identity() : Identity
+        {
+            return $this->mother->new(Identity::class, $personData->name(), $personData->birhtday());
+        }
+
+        public function about() : About
+        {
+            return $this->mother->new(About::class, $personData->description(), $personData->contact());
+        }
+    }
+
 
