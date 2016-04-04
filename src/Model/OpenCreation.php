@@ -2,7 +2,7 @@
 
 namespace Ixmanuel\OpenCreation\Model;
 
-interface OpenDependency 
+interface OpenCreation 
 {
     /**
      * It creates new objects defined in this class.

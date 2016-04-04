@@ -25,7 +25,7 @@ namespace Ixmanuel\OpenCreation;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-class OpenCreation implements Model\OpenDependency
+class Pod implements Model\OpenCreation
 {
 
     /*
@@ -80,29 +80,18 @@ class OpenCreation implements Model\OpenDependency
         $this->dependencies = $dependenciesAsClosures;
     }
 
-   /**
-    * Conveninece constructor.
-    *
-    * @param string $model
-    * @param string $object
-    */
-    public static function initMap(string $model, string $object)
-    {
-        return new Self(self::closureOf($model, $object));
-    }
-
     /**
      * Conveninece constructor.
      *
      * It expects: 
      * [
-     * 	  [ModelA::class, ProductA::class],
-     *	  [ModelB::class, ProductB::class]
+     *    [ModelA::class, ProductA::class],
+     *    [ModelB::class, ProductB::class]
      * ];
      * 
      * @param array $dependencies [string:string]
      */
-    public static function initMaps(array $dependencies)
+    public static function require(array $dependencies) : self
     {
         $dependenciesAsClosures = [];
 
@@ -115,7 +104,19 @@ class OpenCreation implements Model\OpenDependency
         }
         
         return new Self($dependenciesAsClosures);
+    }    
+
+   /**
+    * Conveninece constructor.
+    *
+    * @param string $model
+    * @param string $object
+    */
+    public static function requireOne(string $model, string $object) : self
+    {    
+        return self::require([$model => $object]);
     }
+
 
     /**
      * Supporting a convenience constructor. It maps the model and object 

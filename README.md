@@ -1,20 +1,20 @@
-# Open Creation
-Creating dependency objects only in convenience constructors.
+# Pod Provisioning (before Open Creation)
+Dependency management procures objects for further construction.
 
 ### Words
 dependencies, dependency injection, inversion control, factory method
 
 ### Goal
-Stop using "new" operator inside methods.
+Testable and maintainable code by avoiding the use of the new operator while languages ​​do not support this feature.
 
 ### Benefits
 - Objects that instantiate other objects without "new" operator in their methods.
 - Open dependency avoid a hard-coded one.
 - Autonomus injection avoids global dependency-injection-container.
-- Simple code is maintainable code.
+- Simple code, is maintainable code.
 
 ### Hacks because of limitation of the language
-- Convenience constructors are implemented with static methods because php doesn't provide overloading, but at the end, they always call to the main constructor. Thus, they are composable. (new Object) do the same as (Object::new)
+- Convenience constructors are implemented with static methods because php doesn't provide overloading, but it mimics the same functionallity, they return new objects. Thus, they are composable. (new Object) do the same as (Object::new)
 
 ### Advantages of the language
 - Referencing of classes and interfaces with its namespace.
@@ -28,7 +28,7 @@ Stop using "new" operator inside methods.
 
     $person = new PersonInitFromData(
         new PersonFetched(1),
-        OpenCreation::initMaps([
+        Pod::require([
             Identity::class => ID::class,
             About::class    => AboutMe::class
         ])
@@ -61,4 +61,23 @@ Stop using "new" operator inside methods.
         }
     }
 
+    # A dream
+    #### The Php community adds the ability to implement this concept much as the composer use "require"
+    for dependency management, it can use any word, e.g., use, require, connect, provision or re-use
+    the "use" operator for traits:
 
+    // Definition
+    final class PersonInitFromStore implements Party 
+    {
+        use Identity, About;
+
+        public function identity() : Identity
+        {
+            return new Identity($personData->name(), $personData->birhtday());
+        }        
+    }
+
+    // Usage
+    $person = new PersonInitFromStore($store) use (PersonID, AboutMe);
+
+    Now, we can create new objects from its interfaces, therefore we don't have a hard-coded dependency, and the "new" operator within methods is not a headache anymore because our code is maintainable without complex mappings.

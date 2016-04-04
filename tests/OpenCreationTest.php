@@ -4,7 +4,7 @@ namespace Ixmanuel\OpenCreation;
 
 class OpenCreationTest extends \PHPUnit_Framework_TestCase
 {
-    /**
+    /*
     |
     | The purpose of this solution is to define builders/services into classes.
     | Each builder will create an object that will be returned by a 
@@ -24,9 +24,11 @@ class OpenCreationTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function it_is_the_simplest_way_of_injecting_several_dependencies()
     {
+        /// See ClientObject's implementation: 
+        ///     return $this->openDependency->new(ModelA::class, $this->test->id(), $this->test->name());
         $client = new ClientObject(
             "Client Name",
-            OpenCreation::initMaps([
+            Pod::require([
                 ModelA::class => ProductA::class,
                 ModelB::class => PartB::class
             ])
@@ -40,7 +42,7 @@ class OpenCreationTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function it_is_the_simplest_way_of_injecting_one_dependency()
     {
-        $client = new ClientObject("Client Name", OpenCreation::initMap(ModelA::class, ProductA::class));
+        $client = new ClientObject("Client Name", Pod::requireOne(ModelA::class, ProductA::class));
 
         $this->assertEquals($client->productA()->identification()['number'], (new TestIdentity)->id());
     }
@@ -50,7 +52,7 @@ class OpenCreationTest extends \PHPUnit_Framework_TestCase
     {
         $client = new ClientObject(
             "Client Name",
-            new OpenCreation([
+            new Pod([
                 ModelA::class => function (int $arg1, string $arg2) {
                     return new ProductA($arg1, $arg2);
                 },
@@ -148,7 +150,7 @@ class TestIdentity implements TestIdentifiable
 class ClientObject implements ClientModel
 {
     /// For testing OpenCreation.
-    public function __construct(string $name, Model\OpenDependency $openDependency)
+    public function __construct(string $name, Model\OpenCreation $openDependency)
     {
         $this->name = $name;
 
