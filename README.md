@@ -61,10 +61,8 @@ Testable and maintainable code by avoiding the use of the new operator while lan
         }
     }
 
-    # A dream
-    #### The Php community adds the ability to implement this concept much as the composer use "require"
-    for dependency management, it can use any word, e.g., use, require, connect, provision or re-use
-    the "use" operator for traits:
+### A dream
+###### The Php community adds the ability to implement this concept much as the composer use "require" for dependency management. It can use any word, e.g., use, require, connect, provision; or re-use the "use" operator for traits:
 
     // Definition
     final class PersonInitFromStore implements Party 
@@ -80,4 +78,4 @@ Testable and maintainable code by avoiding the use of the new operator while lan
     // Usage
     $person = new PersonInitFromStore($store) use (PersonID, AboutMe);
 
-    Now, we can create new objects from its interfaces, therefore we don't have a hard-coded dependency, and the "new" operator within methods is not a headache anymore because our code is maintainable without complex mappings.
+Now, we can create new objects from its interfaces, therefore we don't have a hard-coded dependency, and the "new" operator within methods is not a headache anymore because our code is maintainable without complex mappings.
