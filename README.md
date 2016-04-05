@@ -1,11 +1,11 @@
-# Pod Provisioning (before Open Creation)
-Dependency management procures objects for further construction.
+# Provision's pod
+A dependency management that procures objects for further construction.
 
-### Words
+### Keywords
 dependencies, dependency injection, inversion control, factory method
 
 ### Goal
-Testable and maintainable code by avoiding the use of the new operator while languages ​​do not support this feature.
+Testable and maintainable code by avoiding the use of the new operator while languages ​​do not support such feature.
 
 ### Benefits
 - Objects that instantiate other objects without "new" operator in their methods.
@@ -43,7 +43,7 @@ Testable and maintainable code by avoiding the use of the new operator while lan
         private $personData;
         private $mother;
 
-        public function __construct(PersonDataStore $personData, Model\OpenDependency $mother)
+        public function __construct(PersonDataStore $personData, Model\OpenCreation $mother)
         {
             $this->personData = $personData;
 
