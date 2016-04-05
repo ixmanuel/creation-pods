@@ -85,8 +85,8 @@ class Pod implements Model\OpenCreation
      *
      * It expects: 
      * [
-     *    [ModelA::class, ProductA::class],
-     *    [ModelB::class, ProductB::class]
+     *    [ModelA::class => ProductA::class],
+     *    [ModelB::class => ProductB::class]
      * ];
      * 
      * @param array $dependencies [string:string]

@@ -115,13 +115,13 @@ class OpenCreationTest extends \PHPUnit_Framework_TestCase
 }
 
 
-/**
- |
- | ------------------------------------------------------------------
- | Fake classes illustrate its usage.
- | ------------------------------------------------------------------
- | 
- */
+/*
+|
+| ------------------------------------------------------------------
+| Fake classes illustrate its usage.
+| ------------------------------------------------------------------
+| 
+*/
 interface ClientModel
 {
     public function productA() : ModelA;
