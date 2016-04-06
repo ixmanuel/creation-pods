@@ -68,12 +68,12 @@ class Pod implements Model\OpenCreation
 
 
     /**
-     * @array [interfaceName:closure]
+     * @var array [interfaceName:closure]
      */
     private $dependencies;
 
     /**
-     * @var array $dependenciesAsClosures
+     * @param array $dependenciesAsClosures
      */
     public function __construct(array $dependenciesAsClosures)
     {
@@ -125,7 +125,6 @@ class Pod implements Model\OpenCreation
      *
      * @param string $model
      * @param string $object
-     * @param array $args
      *
      * @return array
      */

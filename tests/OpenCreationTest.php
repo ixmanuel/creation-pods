@@ -24,8 +24,6 @@ class OpenCreationTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function it_is_the_simplest_way_of_injecting_several_dependencies()
     {
-        /// See ClientObject's implementation: 
-        ///     return $this->openDependency->new(ModelA::class, $this->test->id(), $this->test->name());
         $client = new ClientObject(
             "Client Name",
             Pod::require([
