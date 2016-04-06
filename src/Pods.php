@@ -25,28 +25,27 @@ namespace Ixmanuel\OpenCreation;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-class Pods implements Model\Packages
+class Pods implements Model\PodResolution
 {
     /*
     | ------------------------------------------------------------------
     | Pods
     | ------------------------------------------------------------------
     |
-    | Php style
+    | Alternative ways of use:
+    |
+    | new Pods(
+    |       new Pod(ModelA::class, ProductA::class)
+    |       new Pod(ModelB::class, ProductB::class)
+    | )    
+    |
     | (new Pods)
     |       ->use(ModelA::class, ProductA::class)
     |       ->use(ModelB::class, ProductB::class)
     |
-    | Composer style
     | (new Pods)
     |       ->require(ModelA::class, ProductA::class)
     |       ->require(ModelB::class, ProductB::class)    
-    |
-    | Object thinking style
-    | new Pods(
-    |       new Pod(ModelA::class, ProductA::class)
-    |       new Pod(ModelB::class, ProductB::class)
-    | )
     |
     */
 
@@ -69,7 +68,7 @@ class Pods implements Model\Packages
      *
      * @return array [string:\Ixamnuel\OpenCreation\Model\DependencyCreation]
      */
-    private static function toDictionary(Model\DependencyCreation ...$pods)
+    private static function toDictionary(Model\DependencyCreation ...$pods) : array
     {
         $dictionary = [];
 
@@ -85,13 +84,15 @@ class Pods implements Model\Packages
     *
     * @param string $model
     * @param string $object
+    *
+    * @return Self
     */
-    public function use (string $model, string $object)
+    public function use (string $model, string $object) : Model\PodResolution
     {
         return new Self(
                 ...array_merge(
                     array_values($this->pods),
-                    [new Pod2($model, $object)]                    
+                    [new Pod($model, $object)]
                 )
         );
     }
@@ -101,8 +102,10 @@ class Pods implements Model\Packages
     *
     * @param string $model
     * @param string $object
+    *
+    * @return Self
     */
-    public function require(string $model, string $object)
+    public function require(string $model, string $object) : Model\PodResolution
     {
         return $this->use($model, $object);
     }

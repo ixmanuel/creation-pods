@@ -25,124 +25,46 @@ namespace Ixmanuel\OpenCreation;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-class Pod implements Model\OpenCreation
+class Pod implements Model\DependencyCreation
 {
-
-    /*
-    |--------------------------------------------------------------------------
-    | Open creation for open dependencies = OO Creations
-    |--------------------------------------------------------------------------
-    |   
-    | Its mission is to avoid "new" in the methods. Only convenience 
-    | constructors can make use of the "new" operator, but the 
-    | implementations are cumbersome:
-    |
-    |   new AnyClass($param1, [
-    |     InterfaceA::class => function(int $p1, $p2) {
-    |		return new A($p1, $p2);
-    |	  },
-    |     InterfaceB::class => function(Protocol $p1) {
-    |		return new B($p1);
-    |	  }
-    |	]);
-    |
-    | And can be used as follows: 
-    |
-    | 	$this->mother[InterfaceName::class]($arg1, $arg2); or
-    |   $this->mother{InterfaceName::class}($arg1, $arg2);
-    |
-    | It is non-orthodox but is the best solution: You don't loose the 
-    | interface checking for the args. Thus, you can use this 
-    | approach.
-    | 
-    | 
-    | But, if you want something less complex and more 
-    | intuitive. You can use OpenCreation:
-    |
-    | 	$this->mother->new(InterfaceName::class, $arg1, $arg2);
-    |
-    | It looks just less complex, readable, encapsulated 
-    | and, doesn't use any magic, nor reflection.
-    |
-    */
-
-
     /**
-     * @var array [interfaceName:closure]
+     * @var string
      */
-    private $dependencies;
+    private $model;
 
     /**
-     * @param array $dependenciesAsClosures
+     * @var string
      */
-    public function __construct(array $dependenciesAsClosures)
-    {
-        $this->dependencies = $dependenciesAsClosures;
-    }
+    private $object;
 
     /**
-     * Conveninece constructor.
-     *
-     * It expects: 
-     * [
-     *    [ModelA::class => ProductA::class],
-     *    [ModelB::class => ProductB::class]
-     * ];
-     * 
-     * @param array $dependencies [string:string]
-     */
-    public static function require(array $dependencies) : self
-    {
-        $dependenciesAsClosures = [];
-
-        foreach ($dependencies as $model => $object) {
-            $dependenciesAsClosures =
-                array_merge(
-                    $dependenciesAsClosures,
-                    self::closureOf($model, $object)
-                );
-        }
-        
-        return new Self($dependenciesAsClosures);
-    }    
-
-   /**
-    * Conveninece constructor.
-    *
-    * @param string $model
-    * @param string $object
-    */
-    public static function requireOne(string $model, string $object) : self
-    {    
-        return self::require([$model => $object]);
-    }
-
-
-    /**
-     * Supporting a convenience constructor. It maps the model and object 
-     * parameters into a dictionary with model as key and a closure as
-     * as value.
-     *
      * @param string $model
      * @param string $object
-     *
-     * @return array
      */
-    private static function closureOf(string $model, string $object) : array
+    public function __construct(string $model, string $object)
     {
-        return [$model => function (...$args) use ($object) {return new $object(...$args);}];
+        $this->model = $model;
+
+        $this->object = $object;   
+    }  
+
+    /**
+     * @return array [string:this]
+     */
+    public function toDictionary() : array
+    {
+        return [$this->model => $this];
     }
 
     /**
      * It creates new objects defined in this class.
      * 
-     * @param string $model
      * @param array $args
      *
      * @return mixed object
      */
-    public function new(string $model, ...$args)
+    public function new(...$args)
     {
-        return $this->dependencies[$model](...$args);
+        return new $this->object(...$args);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Ixmanuel\OpenCreation\Model;
 
-interface Packages
+interface PodResolution
 {
    /**
     * Aggregate constructor.
@@ -12,15 +12,17 @@ interface Packages
     *
     * @return Self
     */
-    public function use(string $model, string $object);
+    public function use(string $model, string $object) : PodResolution;
 
    /**
     * Aggregate constructor. Alias of use.
     *
     * @param string $model
     * @param string $object
+    *
+    * @return Self
     */
-    public function require(string $model, string $object);    
+    public function require(string $model, string $object) : PodResolution;  
 
     /**
      * It creates new objects defined in this class.
