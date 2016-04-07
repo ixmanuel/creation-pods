@@ -25,7 +25,7 @@ namespace Ixmanuel\OpenCreation;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-class Pods implements Model\PodResolution
+class Pods implements Model\PodsResolution
 {
     /*
     | ------------------------------------------------------------------
@@ -87,7 +87,7 @@ class Pods implements Model\PodResolution
     *
     * @return Self
     */
-    public function use (string $model, string $object) : Model\PodResolution
+    public function use (string $model, string $object) : Model\PodsResolution
     {
         return new Self(
                 ...array_merge(
@@ -105,7 +105,7 @@ class Pods implements Model\PodResolution
     *
     * @return Self
     */
-    public function require(string $model, string $object) : Model\PodResolution
+    public function require(string $model, string $object) : Model\PodsResolution
     {
         return $this->use($model, $object);
     }

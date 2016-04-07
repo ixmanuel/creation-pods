@@ -127,7 +127,7 @@ class TestIdentity implements TestIdentifiable
 class ClientObject implements ClientModel
 {
     /// For testing OpenCreation.
-    public function __construct(string $name, Model\PodResolution $packages)
+    public function __construct(string $name, Model\PodsResolution $packages)
     {
         $this->name = $name;
 

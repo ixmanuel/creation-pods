@@ -1,20 +1,20 @@
 # Provision's pod
-A dependency management that procures objects for further construction.
+A dependency management per object that procures objects for further construction.
 
 ### Keywords
 dependencies, dependency injection, inversion control, factory method
 
 ### Goal
-Testable and maintainable code by avoiding the use of the new operator.
+Testable and maintainable code by avoiding to hard-code refeferences in methods.
 
 ### Benefits
-- Objects that instantiate other objects without "new" operator in their methods.
-- Open dependency avoid a hard-coded one.
-- Autonomus injection avoids global dependency-injection-container.
-- Simple code, is maintainable code.
+- Programming based on contracts (interfaces, protocols or models).
+- Switching default implementations with its versions and test objects.
+- Avoiding a global dependency injection container.
+- Creating dependency objects only in convenience constructors.
 
 ### Advantages of the language
-- Referencing of classes and interfaces with its namespace.
+- Referencing of classes and interfaces with its namespace (fqd).
 
 ### Alternatives
 - Usage of mapping or anonymous classes.
@@ -40,7 +40,7 @@ Testable and maintainable code by avoiding the use of the new operator.
         private $personData;
         private $pods;
 
-        public function __construct(PersonDataStore $personData, PodResolution $pods)
+        public function __construct(PersonDataStore $personData, PodsResolution $pods)
         {
             $this->personData = $personData;
 
@@ -59,7 +59,7 @@ Testable and maintainable code by avoiding the use of the new operator.
     }
 
 ### A dream
-###### The Php community adds the ability to implement this concept much as the composer use "require" for dependency management. It can use any word, e.g., use, require, connect, provision; or re-use the "use" operator for traits:
+###### The Php community adds the ability to implement this concept much as the composer use "require" for dependency management. It can use meaningful word, e.g., use, require, connect, provision; or re-use the "use" operator for traits:
 
     // Definition
     final class PersonInitFromStore implements Party 
@@ -74,5 +74,6 @@ Testable and maintainable code by avoiding the use of the new operator.
 
     // Usage
     $person = new PersonInitFromStore($store) use (PersonID, AboutMe);
+    $person = new PersonInitFromStore($store) use (PersonID, AboutMe, AboutMeTest);
 
 Now, we can create new objects from its interfaces, therefore we don't have a hard-coded dependency, and the "new" operator within methods is not a headache anymore because our code is maintainable without complex mappings.
