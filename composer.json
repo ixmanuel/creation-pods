@@ -1,12 +1,12 @@
 {
-    "name": "ixmanuel/transport-pods",
+    "name": "ixmanuel/creation-pods",
     "type": "library",
-    "description": "Creating dependency objects only in convenience constructors.",
+    "description": "It manages object's dependencies for internal builders collaborators.",
     "keywords": [
         "Ix",
         "dependencies", "dependency injection", "inversion control", "factory method"
     ],
-    "homepage": "https://github.com/ixmanuel/transport-pods",
+    "homepage": "https://github.com/ixmanuel/creation-pods",
     "license": "MIT",
     "authors": [
         {
