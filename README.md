@@ -1,5 +1,5 @@
 # Object Building Dependencies
-It manages object's dependencies for internal builders.
+It manages object's dependencies for internal builders collaborators.
 
 
 ### Keywords
@@ -130,7 +130,7 @@ return $this->pods
 
 
 #### Final proposal
-###### The Php community adds the ability to implement this concept much as the composer use "require" for dependency management. It can use meaningful words, e.g., use, require, connect, provision; or re-use the "use" operator for traits:
+###### The Php community adds the ability to implement this concept much as the composer use "require" for dependency management:
 ```php
     // Definition
     final class PersonInitFromStore implements Party 
