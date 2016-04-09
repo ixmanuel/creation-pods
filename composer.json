@@ -1,12 +1,12 @@
 {
-    "name": "ixmanuel/open-creation",
+    "name": "ixmanuel/transport-pods",
     "type": "library",
     "description": "Creating dependency objects only in convenience constructors.",
     "keywords": [
         "Ix",
         "dependencies", "dependency injection", "inversion control", "factory method"
     ],
-    "homepage": "https://github.com/ixmanuel/open-creation",
+    "homepage": "https://github.com/ixmanuel/transport-pods",
     "license": "MIT",
     "authors": [
         {
@@ -22,7 +22,7 @@
     },   
     "autoload": {
         "psr-4": {
-            "Ixmanuel\\OpenCreation\\": "src"
+            "Ixmanuel\\CreationPods\\": "src"
         }
     },   
     "extra": {

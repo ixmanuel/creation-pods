@@ -1,6 +1,6 @@
 <?php 
 
-namespace Ixmanuel\OpenCreation;
+namespace Ixmanuel\CreationPods;
 
 /**
  * The MIT License (MIT)
@@ -25,7 +25,7 @@ namespace Ixmanuel\OpenCreation;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-class Pods implements Model\PodsResolution
+final class Pods implements Model\CreationPods
 {
     /*
     | ------------------------------------------------------------------
@@ -40,23 +40,19 @@ class Pods implements Model\PodsResolution
     | )    
     |
     | (new Pods)
-    |       ->use(ModelA::class, ProductA::class)
-    |       ->use(ModelB::class, ProductB::class)
-    |
-    | (new Pods)
-    |       ->require(ModelA::class, ProductA::class)
-    |       ->require(ModelB::class, ProductB::class)    
+    |       ->define(ModelA::class, ProductA::class)
+    |       ->define(ModelB::class, ProductB::class)   
     |
     */
 
     /**
-     * @var array [string:\Ixmanuel\OpenCreation\Model\DependencyCreation] 
+     * @var array [string:\Ixmanuel\CreationPods\Model\DependencyCreation] 
      */
     private $pods;
 
 
     /**
-     * @param \Ixmanuel\OpenCreation\Model\DependencyCreation $pods
+     * @param \Ixmanuel\CreationPods\Model\DependencyCreation $pods
      */
     public function __construct(Model\DependencyCreation ...$pods)
     {
@@ -64,9 +60,9 @@ class Pods implements Model\PodsResolution
     }
 
     /**
-     * @param array $pods [\Ixamnuel\OpenCreation\Model\DependencyCreation]
+     * @param array $pods [\Ixamnuel\CreationPods\Model\DependencyCreation]
      *
-     * @return array [string:\Ixamnuel\OpenCreation\Model\DependencyCreation]
+     * @return array [string:\Ixamnuel\CreationPods\Model\DependencyCreation]
      */
     private static function toDictionary(Model\DependencyCreation ...$pods) : array
     {
@@ -87,7 +83,7 @@ class Pods implements Model\PodsResolution
     *
     * @return Self
     */
-    public function use (string $model, string $object) : Model\PodsResolution
+    public function define(string $model, string $object) : Model\CreationPods
     {
         return new Self(
                 ...array_merge(
@@ -95,19 +91,6 @@ class Pods implements Model\PodsResolution
                     [new Pod($model, $object)]
                 )
         );
-    }
-
-   /**
-    * Aggregate constructor. Alias of use.
-    *
-    * @param string $model
-    * @param string $object
-    *
-    * @return Self
-    */
-    public function require(string $model, string $object) : Model\PodsResolution
-    {
-        return $this->use($model, $object);
     }
 
     /**

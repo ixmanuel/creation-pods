@@ -1,6 +1,6 @@
 <?php
 
-namespace Ixmanuel\OpenCreation;
+namespace Ixmanuel\CreationPods;
 
 class PodsTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,29 +27,14 @@ class PodsTest extends \PHPUnit_Framework_TestCase
         $client = new ClientObject(
             "Client Name",
             (new Pods)
-                ->use(ModelA::class, ProductA::class)
-                ->use(ModelB::class, PartB::class)
+                ->define(ModelA::class, ProductA::class)
+                ->define(ModelB::class, PartB::class)
         );
 
         $test = new TestIdentity;
         $this->assertTrue($client->productA()->identification()['number'] == $test->id());
         $this->assertTrue($client->partB()->number() == $test->id());
     }
-
-    /** @test */
-    public function it_tests_the_composer_style()
-    {
-        $client = new ClientObject(
-            "Client Name",
-            (new Pods)
-                ->require(ModelA::class, ProductA::class)
-                ->require(ModelB::class, PartB::class)
-        );
-
-        $test = new TestIdentity;
-        $this->assertTrue($client->productA()->identification()['number'] == $test->id());
-        $this->assertTrue($client->partB()->number() == $test->id());
-    }    
 
     /** @test */
     public function it_tests_the_object_thinking_style()
@@ -70,7 +55,7 @@ class PodsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function this_test_is_for_assessing_the_new_anonymous_class_in_php_7()
     {
-        /// This is a raw implementation. You can use this in place of OpenCreation.
+        /// This is a raw implementation. You can use this in place of CreationPods.
         $client = new ClientObjectAnonymous(
             "Client Name",
             new class {
@@ -126,8 +111,8 @@ class TestIdentity implements TestIdentifiable
 
 class ClientObject implements ClientModel
 {
-    /// For testing OpenCreation.
-    public function __construct(string $name, Model\PodsResolution $packages)
+    /// For testing CreationPods.
+    public function __construct(string $name, Model\CreationPods $packages)
     {
         $this->name = $name;
 

@@ -1,6 +1,6 @@
 <?php 
 
-namespace Ixmanuel\OpenCreation\Model;
+namespace Ixmanuel\CreationPods\Model;
 
 interface DependencyCreation
 {

@@ -1,6 +1,6 @@
 <?php 
 
-namespace Ixmanuel\OpenCreation;
+namespace Ixmanuel\CreationPods;
 
 /**
  * The MIT License (MIT)
@@ -25,7 +25,7 @@ namespace Ixmanuel\OpenCreation;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-class Pod implements Model\DependencyCreation
+final class Pod implements Model\DependencyCreation
 {
     /**
      * @var string
