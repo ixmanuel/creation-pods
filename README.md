@@ -129,12 +129,12 @@ return $this->pods
 ```
 
 
-#### Final proposal
-###### The Php community adds the ability to implement this concept much as the composer use "require" for dependency management:
+#### A proposal for the php community.
 ```php
     // Definition
     final class PersonInitFromStore implements Party 
     {
+        // It can use another word to avoid conflicts with traits.
         use Identity, About;
 
         public function identity() : Identity
@@ -143,7 +143,7 @@ return $this->pods
         }        
     }
 
-    // Usage
+    // Init 
     $person = new PersonInitFromStore($store) use (PersonID, AboutMe);
     $person = new PersonInitFromStore($store) use (PersonID, AboutMe, AboutMeTest);
 ```    
