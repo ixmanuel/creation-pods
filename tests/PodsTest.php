@@ -123,12 +123,12 @@ class ClientObject implements ClientModel
 
     public function productA() : ModelA
     {
-        return $this->packages->new(ModelA::class, $this->test->id(), $this->test->name());
+        return $this->packages->requireNew(ModelA::class, $this->test->id(), $this->test->name());
     }
 
     public function partB() : ModelB
     {
-        return $this->packages->new(ModelB::class, $this->test->id());
+        return $this->packages->requireNew(ModelB::class, $this->test->id());
     }
 }
 

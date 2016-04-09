@@ -101,7 +101,7 @@ final class Pods implements Model\CreationPods
      *
      * @return mixed object
      */
-    public function new(string $model, ...$args)
+    public function requireNew(string $model, ...$args)
     {
         return $this->pods[$model]->new(...$args);
     }

@@ -6,7 +6,7 @@ It manages object's dependencies for internal builders.
 inversion control, dependency injection, factory method
 
 ### Goal
-Testable and maintainable code by avoiding hard-coded refeferences in methods.
+Testable and maintainable code by avoiding hard-coded references in methods.
 
 ### Benefits
 - Creating dependency objects only in convenience constructors.
@@ -17,13 +17,12 @@ Testable and maintainable code by avoiding hard-coded refeferences in methods.
 - Referencing of classes and interfaces with its namespace.
 
 ### Alternatives
-- Usage of mapping
+- Usage of mapping.
 - Anonymous classes.
 - Passing empty objects that create those who are fully identifiable.
 
 ### Here is an example that reconstitutes an entity from a data store.
-##### You just need to pass the interface and its implementation.
-
+###### You just need to pass the interface and its implementation.
 
 ```php
     // Init - Alternative 1
@@ -61,26 +60,33 @@ Testable and maintainable code by avoiding hard-coded refeferences in methods.
         public function identity() : Identity
         {
             // The builder is called by its contract (interface) not by its concrete name.
-            // It builds a new object in two stages, is more eloquent, but internally has 
-            // to create two objects because pods is inmutable. See an alternative in
-            // the next method.           
-            return $this->pods
-                            ->require(Identity::class)
-                            ->new($data->name(), $data->birhtday());
+            return $this->pods->requireNew(Identity::class, $data->name(), $data->birhtday());
         }
 
         public function about() : About
         {
             // It builds a new object from its contract.
-            return $this->pods->require(About::class, $data->description(), $data->contact());
+            return $this->pods->requireNew(
+                About::class, 
+                $data->description(), 
+                $data->contact()
+            );
         }
     }  
 ```
 
+## Proposals
 
-### Alternative Naming for different communities of practice (CoP) 
-#### It is just a proposal, not implemented yet.
+#### An eloquent way for creating dependencies:
+```php
+// It is more eloquent but would have to create two objects 
+// because the solution is inmmutable.
+return $this->pods
+                ->require(Identity::class)
+                ->new($data->name(), $data->birhtday());
+```                
 
+#### Alternative Naming for different communities of practice (CoP) 
 ###### Live thinking.
 ```php
     $person = new PersonInitFromData(
@@ -123,7 +129,7 @@ Testable and maintainable code by avoiding hard-coded refeferences in methods.
 ```
 
 
-### Proposal
+#### Final proposal
 ###### The Php community adds the ability to implement this concept much as the composer use "require" for dependency management. It can use meaningful words, e.g., use, require, connect, provision; or re-use the "use" operator for traits:
 ```php
     // Definition

@@ -22,5 +22,5 @@ interface CreationPods
      *
      * @return mixed object
      */
-    public function new(string $model, ...$args);	
+    public function requireNew(string $model, ...$args);	
 }
