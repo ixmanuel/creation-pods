@@ -1,8 +1,8 @@
 <?php
 
-namespace Ixmanuel\CreationPods;
+namespace Ixmanuel\Nexus;
 
-class PodsTest extends \PHPUnit_Framework_TestCase
+class CollaborationTest extends \PHPUnit_Framework_TestCase
 {
     /*
     |
@@ -22,13 +22,12 @@ class PodsTest extends \PHPUnit_Framework_TestCase
     */
 
     /** @test */
-    public function it_tests_the_php_style()
+    public function it_works_with_two_collaborators_by_contract()
     {
         $client = new ClientObject(
             "Client Name",
-            (new Pods)
-                ->define(ModelA::class, ProductA::class)
-                ->define(ModelB::class, PartB::class)
+            new WorkingWith(ModelA::class, ProductA::class),
+            new WorkingWith(ModelB::class, PartB::class)
         );
 
         $test = new TestIdentity;
@@ -36,26 +35,36 @@ class PodsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($client->partB()->number() == $test->id());
     }
 
+
+
     /** @test */
-    public function it_tests_the_object_thinking_style()
+    public function it_calls_collaborators_from_a_convenience_constructor()
     {
-        $client = new ClientObject(
-            "Client Name",
-            new Pods(
-                new Pod(ModelA::class, ProductA::class),
-                new Pod(ModelB::class, PartB::class)
-            )
-        );
+        $client = ClientObject::withName("Client Name");
 
         $test = new TestIdentity;
         $this->assertTrue($client->productA()->identification()['number'] == $test->id());
         $this->assertTrue($client->partB()->number() == $test->id());
-    }   
+    }  
+
+    /** @test */
+    public function it_tests_a_convenience_constructor_of_a_collaborator()
+    {
+        $client = new ClientObject(
+            "Client Name",
+            new WorkingWith(ModelA::class, ProductA::class),
+            new WorkingWith(ModelB::class, PartB::class)
+        );
+
+        $test = new TestIdentity;
+        $this->assertTrue($client->unamedProductA()->identification()['number'] == $test->id());
+    }             
+  
 
     /** @test */
     public function this_test_is_for_assessing_the_new_anonymous_class_in_php_7()
     {
-        /// This is a raw implementation. You can use this in place of CreationPods.
+        /// This is a raw implementation. You can use this in place of Nexus.
         $client = new ClientObjectAnonymous(
             "Client Name",
             new class {
@@ -111,24 +120,40 @@ class TestIdentity implements TestIdentifiable
 
 class ClientObject implements ClientModel
 {
-    /// For testing CreationPods.
-    public function __construct(string $name, Model\CreationPods $packages)
+    /// For testing Nexus.
+    public function __construct(string $name, Model\Collaboration $modelA, Model\Collaboration $modelB)
     {
         $this->name = $name;
 
         $this->test = new TestIdentity;
 
-        $this->packages = $packages;
+        $this->modelA = $modelA;
+
+        $this->modelB = $modelB;
+    }
+
+    public static function withName(string $name)
+    {
+        return new Self(
+            $name, 
+            new WorkingWith(ModelA::class, ProductA::class),
+            new WorkingWith(ModelB::class, PartB::class)
+        );
     }
 
     public function productA() : ModelA
     {
-        return $this->packages->requireNew(ModelA::class, $this->test->id(), $this->test->name());
+        return $this->modelA->new($this->test->id(), $this->test->name());
+    }
+
+    public function unamedProductA() : ModelA
+    {
+        return $this->modelA->withNumber($this->test->id());
     }
 
     public function partB() : ModelB
     {
-        return $this->packages->requireNew(ModelB::class, $this->test->id());
+        return $this->modelB->new($this->test->id());
     }
 }
 
@@ -170,6 +195,11 @@ class ProductA implements ModelA
     public function __construct(int $number, string $name)
     {
         $this->identification = ['number' => $number, 'name' => $name];
+    }
+
+    public static function withNumber(int $number)
+    {
+        return new Self($number, (new TestIdentity)->name());
     }
 
     public function identification() : array

@@ -1,14 +1,9 @@
 <?php 
 
-namespace Ixmanuel\CreationPods\Model;
+namespace Ixmanuel\Nexus\Model;
 
-interface DependencyCreation
+interface Collaboration
 {
-    /**
-     * @return array [string:this]
-     */
-    public function toDictionary() : array;
-
     /**
      * It creates new objects defined in this class.
      * 

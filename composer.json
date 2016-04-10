@@ -1,12 +1,12 @@
 {
-    "name": "ixmanuel/creation-pods",
+    "name": "ixmanuel/nexus",
     "type": "library",
     "description": "It manages object's dependencies for internal builders collaborators.",
     "keywords": [
         "Ix",
         "dependencies", "dependency injection", "inversion control", "factory method"
     ],
-    "homepage": "https://github.com/ixmanuel/creation-pods",
+    "homepage": "https://github.com/ixmanuel/nexus",
     "license": "MIT",
     "authors": [
         {
@@ -22,7 +22,7 @@
     },   
     "autoload": {
         "psr-4": {
-            "Ixmanuel\\CreationPods\\": "src"
+            "Ixmanuel\\Nexus\\": "src"
         }
     },   
     "extra": {

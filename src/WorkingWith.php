@@ -1,6 +1,6 @@
 <?php 
 
-namespace Ixmanuel\CreationPods;
+namespace Ixmanuel\Nexus;
 
 /**
  * The MIT License (MIT)
@@ -25,12 +25,12 @@ namespace Ixmanuel\CreationPods;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-final class Pod implements Model\DependencyCreation
+final class WorkingWith implements Model\Collaboration
 {
     /**
      * @var string
      */
-    private $model;
+    private $contract;
 
     /**
      * @var string
@@ -38,26 +38,36 @@ final class Pod implements Model\DependencyCreation
     private $object;
 
     /**
-     * @param string $model
+     * @param string $contract
      * @param string $object
      */
-    public function __construct(string $model, string $object)
+    public function __construct(string $contract, string $object)
     {
-        $this->model = $model;
+        $this->contract = $contract;
 
         $this->object = $object;   
     }  
 
     /**
-     * @return array [string:this]
+     * Convenience constructors.
+     *
+     * @param string $constructor
+     * @param array $args
+     * @return mixed
+     *
+     * @throws \Exception
      */
-    public function toDictionary() : array
+    public function __call(string $constructor, array $args)
     {
-        return [$this->model => $this];
+        if (! method_exists($this->object, $constructor)) {
+            throw new Exception("Error Processing Request. The convenience constructor [{$constructor} doesn't exist.]", 1);
+        }
+
+        return $this->object::$constructor(...$args);
     }
 
     /**
-     * It creates new objects defined in this class.
+     * It creates new collaborators defined in this class.
      * 
      * @param array $args
      *
