@@ -5,7 +5,7 @@ namespace Ixmanuel\Nexus\Model;
 interface Collaboration
 {
     /**
-     * It creates new objects defined in this class.
+     * It wraps the new operator.
      * 
      * @param array $args
      *

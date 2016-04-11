@@ -2,6 +2,8 @@
 
 namespace Ixmanuel\Nexus;
 
+use Exception;
+
 /**
  * The MIT License (MIT)
  *
@@ -67,7 +69,7 @@ final class WorkingWith implements Model\Collaboration
     }
 
     /**
-     * It creates new collaborators defined in this class.
+     * It wraps the new operator.
      * 
      * @param array $args
      *

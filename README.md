@@ -1,3 +1,5 @@
+[![Build Status](https://img.shields.io/travis/ixmanuel/nexus/master.svg)](https://travis-ci.org/ixmanuel/nexus.svg)
+
 # Object Building Dependencies
 It manages object's dependencies for internal builders collaborators.
 
@@ -81,4 +83,4 @@ Testable and maintainable code by avoiding hard-coded references in methods.
     $person = new PersonInitFromStore($store) use (PersonID, AboutMe, AboutMeTest);
 ```    
 
-Now, we can create new objects from its interfaces, therefore we don't have a hard-coded dependency, and the "new" operator within methods is not a headache anymore because our code is maintainable without complex mappings.
+Now, we can create new objects from its interfaces, therefore we don't have a hard-coded dependency, and the "new" operator within methods is not a headache anymore because it creates the object from the contract, not the implementation.
