@@ -3,6 +3,7 @@
 namespace Ixmanuel\Nexus;
 
 use Exception;
+use Ixmanuel\Nexus\Model\Assigning;
 
 /**
  * The MIT License (MIT)
@@ -27,7 +28,7 @@ use Exception;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-final class WorkingWith implements Model\Collaboration
+final class Assignation implements Assigning
 {
     /**
      * @var string
@@ -62,7 +63,10 @@ final class WorkingWith implements Model\Collaboration
     public function __call(string $constructor, array $args)
     {
         if (! method_exists($this->object, $constructor)) {
-            throw new Exception("Error Processing Request. The convenience constructor [{$constructor} doesn't exist.]", 1);
+            throw new Exception(
+                "Error Processing Request. The convenience constructor [{$constructor} doesn't exist.]", 
+                1
+            );
         }
 
         return $this->object::$constructor(...$args);

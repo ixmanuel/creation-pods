@@ -2,7 +2,7 @@
 
 namespace Ixmanuel\Nexus;
 
-class CollaborationTest extends \PHPUnit_Framework_TestCase
+class AssigningTest extends \PHPUnit_Framework_TestCase
 {
     /*
     |
@@ -26,8 +26,8 @@ class CollaborationTest extends \PHPUnit_Framework_TestCase
     {
         $client = new ClientObject(
             "Client Name",
-            new WorkingWith(ModelA::class, ProductA::class),
-            new WorkingWith(ModelB::class, PartB::class)
+            new Assignation(ModelA::class, ProductA::class),
+            new Assignation(ModelB::class, PartB::class)
         );
 
         $test = new TestIdentity;
@@ -52,8 +52,8 @@ class CollaborationTest extends \PHPUnit_Framework_TestCase
     {
         $client = new ClientObject(
             "Client Name",
-            new WorkingWith(ModelA::class, ProductA::class),
-            new WorkingWith(ModelB::class, PartB::class)
+            new Assignation(ModelA::class, ProductA::class),
+            new Assignation(ModelB::class, PartB::class)
         );
 
         $test = new TestIdentity;
@@ -121,7 +121,7 @@ class TestIdentity implements TestIdentifiable
 class ClientObject implements ClientModel
 {
     /// For testing Nexus.
-    public function __construct(string $name, Model\Collaboration $modelA, Model\Collaboration $modelB)
+    public function __construct(string $name, Model\Assigning $modelA, Model\Assigning $modelB)
     {
         $this->name = $name;
 
@@ -136,8 +136,8 @@ class ClientObject implements ClientModel
     {
         return new Self(
             $name, 
-            new WorkingWith(ModelA::class, ProductA::class),
-            new WorkingWith(ModelB::class, PartB::class)
+            new Assignation(ModelA::class, ProductA::class),
+            new Assignation(ModelB::class, PartB::class)
         );
     }
 
