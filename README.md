@@ -30,8 +30,8 @@ Testable and maintainable code by avoiding hard-coded references in methods.
     // Init 
     $person = new PersonInitFromData(
         new PersonFetched(1),
-        new Assignation(Identity::class, ID::class),
-        new Assignation(About::class, AboutMe::class)
+        new Assignment(Identity::class, ID::class),
+        new Assignment(About::class, AboutMe::class)
     );  
 
     // Definition
@@ -41,7 +41,7 @@ Testable and maintainable code by avoiding hard-coded references in methods.
         private $identity;
         private $about;
 
-        public function __construct(PersonDataStore $data, Assigning $identity, Assigning $about)
+        public function __construct(PersonDataStore $data, Assignable $identity, Assignable $about)
         {
             $this->data = $data;
 

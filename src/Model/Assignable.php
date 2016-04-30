@@ -2,7 +2,7 @@
 
 namespace Ixmanuel\Nexus\Model;
 
-interface Assigning
+interface Assignable
 {
     /**
      * It wraps the new operator.

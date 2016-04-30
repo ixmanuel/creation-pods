@@ -3,7 +3,7 @@
 namespace Ixmanuel\Nexus;
 
 use Exception;
-use Ixmanuel\Nexus\Model\Assigning;
+use Ixmanuel\Nexus\Model\Assignable;
 
 /**
  * The MIT License (MIT)
@@ -28,7 +28,7 @@ use Ixmanuel\Nexus\Model\Assigning;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-final class Assignation implements Assigning
+final class Assignment implements Assignable
 {
     /**
      * @var string
