@@ -45,7 +45,7 @@ Testable and maintainable code by avoiding hard-coded references in methods.
         private $identity;
         private $about;
 
-        public function __construct(PersonDataStore $record, Assignable $identity, Assignable $about)
+        public function __construct(IdentityRecord $record, Assignable $identity, Assignable $about)
         {
             $this->record = $record;
 
