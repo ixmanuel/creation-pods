@@ -63,7 +63,7 @@ Testable and maintainable code by avoiding hard-coded references in methods.
         public function about() : About
         {
             // It calls a convenience constructor in the AboutMe class.
-            return $this->about->withDescription($record->description());
+            return $this->about->withID($this->identity());
         }
     }  
 ```
