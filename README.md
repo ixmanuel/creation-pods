@@ -74,18 +74,18 @@ Testable and maintainable code by avoiding hard-coded references in methods.
     final class PersonFromStore implements Party 
     {
         // It can use another word to avoid conflicts with traits.
-        use Identity, About;
+        use (Identity, About);
 
         public function identity() : Identity
         {
             return new Identity($record->name(), $record->birhtday());
-        }        
+        }               
     }
 
     // Usage
-    $person = new PersonInitFromStore($record) use (PersonID, AboutMe);
+    $person = new PersonFromStore($fetchedPerson) use (PersonID, AboutMe);
     // Test
-    $person = new PersonInitFromStore($record) use (PersonID, AboutMeTest);
+    $person = new PersonFromStore($fetchedPerson) use (PersonIDTest, AboutMe);
 ```    
 
 Now, we can create new objects from its interfaces, therefore we don't have a hard-coded dependency, and the "new" operator within methods is not a headache anymore because it creates the object from the contract, not the implementation.
