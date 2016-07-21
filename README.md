@@ -1,6 +1,6 @@
 [![Build Status](https://img.shields.io/travis/ixmanuel/nexus/master.svg)](https://travis-ci.org/ixmanuel/nexus.svg)
 
-# Object Building Dependencies
+# Mapping dependencies at construction <time></time>
 It manages the creation of collaborators without hard-coding references in methods.
 
 ### Keywords
