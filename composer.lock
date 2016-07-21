@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bdc1722fcc327c799b2b3703bbe9fa06",
-    "content-hash": "c389000172bfb59edee7d58ac6111bf0",
+    "hash": "6866d7cc2d16e927c3c1bf34bec61e9c",
+    "content-hash": "d63e0175072e1aeacc987d1afa912691",
     "packages": [],
     "packages-dev": [
         {
@@ -117,12 +117,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "b02221e42163be673f9b44a0bc92a8b4907a7c6d"
+                "reference": "80138299aadb590ce3fd0b75d30343fff9f8d0a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/b02221e42163be673f9b44a0bc92a8b4907a7c6d",
-                "reference": "b02221e42163be673f9b44a0bc92a8b4907a7c6d",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/80138299aadb590ce3fd0b75d30343fff9f8d0a8",
+                "reference": "80138299aadb590ce3fd0b75d30343fff9f8d0a8",
                 "shasum": ""
             },
             "require": {
@@ -171,7 +171,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2016-02-21 17:41:21"
+            "time": "2016-04-29 12:18:42"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -419,12 +419,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "ee7a4e425a773d4f6a201a2ce1cc2216d8fbd3d4"
+                "reference": "ac4dfb003d2d89e8f474fa15b0f9714ac1b45899"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ee7a4e425a773d4f6a201a2ce1cc2216d8fbd3d4",
-                "reference": "ee7a4e425a773d4f6a201a2ce1cc2216d8fbd3d4",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ac4dfb003d2d89e8f474fa15b0f9714ac1b45899",
+                "reference": "ac4dfb003d2d89e8f474fa15b0f9714ac1b45899",
                 "shasum": ""
             },
             "require": {
@@ -483,7 +483,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-04-03 05:55:37"
+            "time": "2016-04-29 09:30:21"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

@@ -1,7 +1,7 @@
 [![Build Status](https://img.shields.io/travis/ixmanuel/nexus/master.svg)](https://travis-ci.org/ixmanuel/nexus.svg)
 
 # Object Building Dependencies
-It manages object's dependencies for internal builders collaborators.
+It manages the creation of collaborators without hard-coding references in methods.
 
 ### Keywords
 inversion control, dependency injection, factory method
@@ -27,23 +27,27 @@ Testable and maintainable code by avoiding hard-coded references in methods.
 ###### You just need to pass the interface and its implementation.
 
 ```php
-    // Init 
-    $person = new PersonInitFromData(
-        new PersonFetched(1),
+    // It reconstitutes a person from a data store with the contract 
+    // Identity and its counterpart implementation ID and the About 
+    // contract with its implementation AboutMe.
+    // The creation is delayed until need it,
+    // but it is not a Singleton.
+    $person = new PersonFromStore(
+        new FetchedPerson(1),
         new Assignment(Identity::class, ID::class),
         new Assignment(About::class, AboutMe::class)
     );  
 
-    // Definition
-    final class PersonInitFromData implements Party
+    // Description
+    final class PersonFromStore implements Party
     {
-        private $data;
+        private $record;
         private $identity;
         private $about;
 
-        public function __construct(PersonDataStore $data, Assignable $identity, Assignable $about)
+        public function __construct(PersonDataStore $record, Assignable $identity, Assignable $about)
         {
-            $this->data = $data;
+            $this->record = $record;
 
             $this->identity = $identity;
 
@@ -52,14 +56,14 @@ Testable and maintainable code by avoiding hard-coded references in methods.
 
         public function identity() : Identity
         {
-            // It calls the new operator in the ID class.
-            return $this->identity->new($data->name(), $data->birhtday());
+            // It calls the main constructor or new operator in the ID class.
+            return $this->identity->new($record->name(), $record->birhtday());
         }
 
         public function about() : About
         {
             // It calls a convenience constructor in the AboutMe class.
-            return $this->about->withDescription($data->description());
+            return $this->about->withDescription($record->description());
         }
     }  
 ```
@@ -67,20 +71,21 @@ Testable and maintainable code by avoiding hard-coded references in methods.
 ### A proposal for the php community.
 ```php
     // Definition
-    final class PersonInitFromStore implements Party 
+    final class PersonFromStore implements Party 
     {
         // It can use another word to avoid conflicts with traits.
         use Identity, About;
 
         public function identity() : Identity
         {
-            return new Identity($data->name(), $data->birhtday());
+            return new Identity($record->name(), $record->birhtday());
         }        
     }
 
-    // Init 
-    $person = new PersonInitFromStore($store) use (PersonID, AboutMe);
-    $person = new PersonInitFromStore($store) use (PersonID, AboutMe, AboutMeTest);
+    // Usage
+    $person = new PersonInitFromStore($record) use (PersonID, AboutMe);
+    // Test
+    $person = new PersonInitFromStore($record) use (PersonID, AboutMeTest);
 ```    
 
 Now, we can create new objects from its interfaces, therefore we don't have a hard-coded dependency, and the "new" operator within methods is not a headache anymore because it creates the object from the contract, not the implementation.
