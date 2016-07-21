@@ -57,7 +57,7 @@ Testable and maintainable code by avoiding hard-coded references in methods.
         public function identity() : Identity
         {
             // It calls the main constructor or new operator in the ID class.
-            return $this->identity->new($record->name(), $record->birhtday());
+            return $this->identity->new($record->key());
         }
 
         public function about() : About
@@ -78,8 +78,10 @@ Testable and maintainable code by avoiding hard-coded references in methods.
 
         public function identity() : Identity
         {
-            return new Identity($record->name(), $record->birhtday());
-        }               
+            return new Identity($record->key());
+        }
+
+        ...               
     }
 
     // Usage
