@@ -90,4 +90,4 @@ Testable and maintainable code by avoiding hard-coded references in methods.
     $person = new PersonFromStore($fetchedPerson) use (PersonIDTest, AboutMe);
 ```    
 
-Now, we can create new objects from its interfaces, therefore we don't have a hard-coded dependency, and the "new" operator within methods is not a headache anymore because it creates the object from the contract, not the implementation.
+Now, we can create new objects from their interfaces. Thus, we have no more hard-coded dependency.
