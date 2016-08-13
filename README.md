@@ -20,7 +20,7 @@ Testable, reusable and maintainable code by avoiding hard-coded references in me
 ### Alternatives
 - Usage of mapping.
 - Anonymous classes.
-- Passing empty objects that create those who are fully identifiable.
+- Passing empty objects that create those which are fully identifiable.
 - Defining and implementing an interface for each collaboration.
 
 ### Here is an example that reconstitutes an entity from a data store.
