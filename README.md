@@ -92,4 +92,4 @@ Testable, reusable and maintainable code by avoiding hard-coded references in me
     $person = new PersonFromStore($fetchedPerson) use (PersonIDTest, AboutMe);
 ```    
 
-Now, we can create new objects from their interfaces and thus, we have no more hard-coded dependencies in the methods.
+Now, we can create objects from their interfaces and thus, we have no more hard-coded dependencies in the methods.
