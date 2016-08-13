@@ -1,7 +1,7 @@
 [![Build Status](https://img.shields.io/travis/ixmanuel/nexus/master.svg)](https://travis-ci.org/ixmanuel/nexus.svg)
 
 # Mapping dependencies at construction time
-It manages the creation of collaborators without hard-coding references in methods.
+This registers collaborators (dependencies) in the constructors in order to decouple the object creation in methods.
 
 ### Keywords
 inversion control, dependency injection, builder
