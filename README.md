@@ -4,7 +4,7 @@
 It manages the creation of collaborators without hard-coding references in methods.
 
 ### Keywords
-inversion control, dependency injection, factory method, builder
+inversion control, dependency injection, builder
 
 ### Goal
 Testable, reusable and maintainable code by avoiding hard-coded references in methods.
@@ -57,7 +57,7 @@ Testable, reusable and maintainable code by avoiding hard-coded references in me
         public function identity() : Identity
         {
             // It calls the main constructor or the operator "new" in the ID class.
-            return $this->identity->new($record->key());
+            return $this->identity->new($this->record->key());
         }
 
         public function about() : About
