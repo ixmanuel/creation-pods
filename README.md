@@ -10,7 +10,7 @@ inversion control, dependency injection, builder
 Testable, reusable and maintainable code by avoiding hard-coded references in methods.
 
 ### Benefits
-- Creating dependency objects only in convenience constructors.
+- Creating collaborators (a.k.a. dependencies) only in constructors.
 - Avoiding a global dependency injection container.
 - Switching default implementations with alternatives and test's objects.
 
@@ -54,12 +54,14 @@ Testable, reusable and maintainable code by avoiding hard-coded references in me
             $this->about = $about;
         }
 
+        // Please, your ID?
         public function identity() : Identity
         {
             // It calls the main constructor or the operator "new" in the ID class.
             return $this->identity->new($this->record->key());
         }
 
+        // Tell me something about you.
         public function about() : About
         {
             // It calls a convenience constructor in the AboutMe class.
