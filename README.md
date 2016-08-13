@@ -75,7 +75,7 @@ Testable, reusable and maintainable code by avoiding hard-coded references in me
     // Definition
     final class PersonFromStore implements Party 
     {
-        // It can use another word to avoid conflicts with traits.
+        // It can use another word, such as join, to avoid conflicts with traits.
         use (Identity, About);
 
         public function identity() : Identity
