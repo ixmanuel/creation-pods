@@ -32,7 +32,7 @@ Testable, reusable and maintainable code by avoiding hard-coded references in me
     // of them are collaborators. Take note that the creation is
     // delayed until need it, but it is not a Singleton.
 
-    // Testing purpopses.
+    // Testing purposes.
     $person = new PersonFromStore(
         new FetchedPerson($id), TestPersonID::class, AboutMe::class
     );   
