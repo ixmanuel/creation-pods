@@ -27,15 +27,19 @@ Testable, reusable and maintainable code by avoiding hard-coded references in me
 ###### You just need to pass the interface and its implementation.
 
 ```php
-    // It reconstitutes a person from a data store: ID is a kind 
-    // of Identity as much as an AboutMe is a kind of About and
-    // both of them are collaborators. Take note that the 
-    // creation is delayed until need it, but it is not 
-    // a Singleton.
+    // It reconstitutes a person from a data store: PersonID is a kind 
+    // of Identity as much as an AboutMe is a kind of About and both
+    // of them are collaborators. Take note that the creation is
+    // delayed until need it, but it is not a Singleton.
+
+    // Testing purpopses.
     $person = new PersonFromStore(
-        new FetchedPerson($id),
-        new Assignment(Identity::class, ID::class),
-        new Assignment(About::class, AboutMe::class)
+        new FetchedPerson($id), TestPersonID::class, AboutMe::class
+    );   
+
+    // Application.
+    $person = new PersonFromStore(
+        new FetchedPerson($id), PersonID::class, AboutMe::class
     );  
 
     // Description
@@ -45,19 +49,20 @@ Testable, reusable and maintainable code by avoiding hard-coded references in me
         private $identity;
         private $about;
 
-        public function __construct(IdentityRecord $record, Assignable $identity, Assignable $about)
+        public function __construct(IdentityRecord $record, string $identity, string $about)
         {
-            $this->record = $record;
+            $this->record = $record;        
 
-            $this->identity = $identity;
+            $this->identity = new Assignment(Identity::class, $identity);
 
-            $this->about = $about;
+            $this->about = new Assignment(About::class, $about);
         }
 
         // Please, your ID?
         public function identity() : Identity
         {
             // It calls the main constructor or the operator "new" in the ID class.
+            // Same as: new PersonID(...)
             return $this->identity->new($this->record->key());
         }
 
@@ -65,6 +70,7 @@ Testable, reusable and maintainable code by avoiding hard-coded references in me
         public function about() : About
         {
             // It calls a convenience constructor in the AboutMe class.
+            // Same as: AboutMe::withID(...)
             return $this->about->withID($this->identity());
         }
     }  
@@ -89,7 +95,7 @@ Testable, reusable and maintainable code by avoiding hard-coded references in me
     // Client
     $person = new PersonFromStore($fetchedPerson) use (PersonID, AboutMe);
     // Test
-    $person = new PersonFromStore($fetchedPerson) use (PersonIDTest, AboutMe);
+    $person = new PersonFromStore($fetchedPerson) use (TestPersonID, AboutMe);
 ```    
 
 Now, we can create objects from their interfaces and thus, we have no more hard-coded dependencies in the methods.
